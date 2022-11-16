@@ -30,7 +30,7 @@ namespace AzureSQLTransientHandling
             .Or<SqlException>(AnyRetryableError)
             .WaitAndRetry(SqlRetryCount, ExponentialBackoff);
 
-        private static readonly Policy SqlRetryAsyncPolicy = Policy
+        private static readonly AsyncRetryPolicy SqlRetryAsyncPolicy = Policy
             .Handle<TimeoutException>()
             .Or<SqlException>(AnyRetryableError)
             .WaitAndRetryAsync(SqlRetryCount, ExponentialBackoff);
